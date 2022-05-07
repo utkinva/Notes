@@ -14,12 +14,13 @@ const App = {
             addBtnVisible: 'btn primary visible',
             revertBtnClickable: false,
 
-            toolTipText: 'Максимальная длина названия - 50 символов!',
+
             toolTipVisible: false,
             revertChangesVisible: false,
 
             currentLanguage: 'Russian',
 
+            toolTipText: 'Максимальная длина 50 символов',
             titleText: 'Заметки',
             placeholderText: 'Введите название заметки',
             addBtnText: 'Добавить',
@@ -47,6 +48,7 @@ const App = {
     },
     methods: {
         changeLanguageToEng() {
+            this.toolTipText = 'Maximum length 50 characters'
             this.titleText = 'Notes'
             this.placeholderText = 'Enter note title...'
             this.addBtnText = 'Create'
@@ -61,6 +63,7 @@ const App = {
             window.$cookies.set('cookiesLanguage', this.currentLanguage)
         },
         changeLanguageToRu() {
+            this.toolTipText = 'Максимальная длина 50 символов'
             this.titleText = 'Заметки'
             this.placeholderText = 'Введите название заметки'
             this.addBtnText = 'Добавить'
