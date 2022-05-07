@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app" v-cloak>
+    <div class="card marked">
+        <h1>{{ title }}</h1>
+        <transition name="fade">
+            <div v-if="toolTipVisible" class="alert warning modal">
+                {{ toolTipText }}
+            </div>
+        </transition>
+
+        <div class="form-control">
+            <input
+                maxlength="50"
+                type="text"
+                :placeholder="placeholderText"
+                v-model="inputValue"
+                @keypress.enter="addNewNote()"
+            />
+        </div>
+        <button :class="addBtnVisible" @click="addNewNote">Добавить</button>
+        <span>
+            <button
+                :class="saveBtnVisible"
+                @click="saveChanges()">
+                Сохранить
+            </button>
+            <button
+                :class="cancelBtnVisible"
+                @click="cancelBtn()">
+                Отмена
+            </button>
+        </span>
+
+        <hr>
+        <ul class="list" v-if="notesList.length !== 0">
+            <li class="list-item noselect" v-for="(uNote, i) in notesList">
+                {{ i + 1}}) {{ uNote }}
+                <span>
+                    <button
+                        style="right: 0"
+                        class="btn primary"
+                        @click="editNote(i)">
+                        Редактировать
+                    </button>
+                    <button
+                        class="btn danger"
+                        @click="deleteNote(i)">
+                        Удалить
+                    </button>
+                </span>
+
+            </li>
+            <hr />
+            <li><strong>Всего заметок: {{ notesList.length }}</strong></li>
+        </ul>
+        <div v-else>Заметок пока нет.</div>
+
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="app.js"></script>
+</body>
+</html>
