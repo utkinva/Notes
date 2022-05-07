@@ -12,12 +12,21 @@
     </style>
 </head>
 <body>
-<div class="container" id="app" v-cloak>
+<div class="container noselect" id="app" v-cloak>
     <div class="card marked">
         <h1>{{ title }}</h1>
         <transition name="fade">
-            <div v-if="toolTipVisible" class="alert warning modal">
+            <div v-if="toolTipVisible" class="alert danger modal">
                 {{ toolTipText }}
+            </div>
+        </transition>
+        <transition name="fade">
+            <div v-if="revertChangesVisible" class="alert warning modal list">
+                    <div>
+                        Заметка была удалена
+                        <button class="btn warning" style="margin-left: 230px;" @click="revertChanges()">Отменить</button>
+                    </div>
+
             </div>
         </transition>
 

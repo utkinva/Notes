@@ -93,6 +93,7 @@ h3 {
 }
 
 .btn:disabled {
+
     cursor: not-allowed;
     opacity: 1!important;
     background: #eee!important;
@@ -120,6 +121,7 @@ h3 {
     color: #fff;
     border-color: #c25205;
 }
+
 
 .container {
     margin: 0 auto;
@@ -405,7 +407,7 @@ h3 {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
