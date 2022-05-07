@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Notes</title>
+
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="theme.css">
     <style>
@@ -12,9 +12,23 @@
     </style>
 </head>
 <body>
-<div class="container noselect" id="app" v-cloak>
+<div class="container with-nav noselect" id="app" v-cloak>
+    <title>{{titleText}}</title>
+    <div class="navbar">
+        <ul class="navbar-menu">
+            <li>
+                <a href="https://github.com/utkinva" target="_blank">GitHub</a>
+            </li>
+        </ul>
+        <ul class="navbar-menu">
+            <li>
+                <button class="btn" @click="changeLanguageToRu()">Русский</button>
+                <button class="btn" @click="changeLanguageToEng()">English</button>
+            </li>
+        </ul>
+    </div>
     <div class="card marked">
-        <h1>{{ title }}</h1>
+        <h1>{{ titleText }}</h1>
         <transition name="fade">
             <div v-if="toolTipVisible" class="alert danger modal">
                 {{ toolTipText }}
@@ -22,9 +36,9 @@
         </transition>
         <transition name="fade">
             <div v-if="revertChangesVisible" class="alert warning modal list">
-                    <div>
-                        Заметка была удалена
-                        <button class="btn warning" style="margin-left: 230px;" @click="revertChanges()">Отменить</button>
+                    <div style="line-height: 40px;">
+                        {{wasRemovedText}}
+                        <button class="btn warning" style="float: right; line-height: 20px;" @click="revertChanges()">{{cancelBtnText}}</button>
                     </div>
 
             </div>
@@ -39,17 +53,17 @@
                 @keypress.enter="addNewNote()"
             />
         </div>
-        <button :class="addBtnVisible" @click="addNewNote">Добавить</button>
+        <button :class="addBtnVisible" @click="addNewNote">{{addBtnText}}</button>
         <span>
             <button
                 :class="saveBtnVisible"
                 @click="saveChanges()">
-                Сохранить
+                {{saveBtnText}}
             </button>
             <button
                 :class="cancelBtnVisible"
                 @click="cancelBtn()">
-                Отмена
+                {{cancelBtnText}}
             </button>
         </span>
 
@@ -62,20 +76,20 @@
                         style="right: 0"
                         class="btn primary"
                         @click="editNote(i)">
-                        Редактировать
+                        {{editBtnText}}
                     </button>
                     <button
                         class="btn danger"
                         @click="deleteNote(i)">
-                        Удалить
+                        {{deleteBtnText}}
                     </button>
                 </span>
 
             </li>
             <hr />
-            <li><strong>Всего заметок: {{ notesList.length }}</strong></li>
+            <li><strong>{{allNotesText}}: {{ notesList.length }}</strong></li>
         </ul>
-        <div v-else>Заметок пока нет.</div>
+        <div v-else>{{noNotesYetText}}</div>
 
     </div>
 </div>

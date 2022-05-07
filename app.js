@@ -1,30 +1,79 @@
 const App = {
     data() {
         return {
-            title: 'Заметки',
-            placeholderText: 'Введите название заметки',
             inputValue: '',
             notesList: [],
             deletedNotesList: [],
+
             lastItemDeleted: '',
             lastIndexDeleted: 0,
-            revertBtnClickable: false,
             editItemIndex: 0,
+
             saveBtnVisible: 'btn primary invisible',
             cancelBtnVisible: 'btn primary invisible danger',
             addBtnVisible: 'btn primary visible',
+            revertBtnClickable: false,
+
             toolTipText: 'Максимальная длина названия - 50 символов!',
             toolTipVisible: false,
-            revertChangesVisible: false
+            revertChangesVisible: false,
+
+            currentLanguage: 'Russian',
+
+            titleText: 'Заметки',
+            placeholderText: 'Введите название заметки',
+            addBtnText: 'Добавить',
+            saveBtnText: 'Сохранить',
+            editBtnText: 'Редактировать',
+            deleteBtnText: 'Удалить',
+            cancelBtnText: 'Отменить',
+            allNotesText: 'Всего заметок',
+            noNotesYetText: 'Заметок пока нет.',
+            wasRemovedText: 'Заметка была удалена'
         }
     },
     mounted() {
-        if ($cookies.get('cookiesNotesList')){
+        if ($cookies.get('cookiesNotesList')) {
             this.notesList = JSON.parse(window.$cookies.get('cookiesNotesList'))
         }
-
+        if ($cookies.get('cookiesLanguage')) {
+            if ($cookies.get('cookiesLanguage') === 'Russian') {
+                this.changeLanguageToRu()
+            }
+            if ($cookies.get('cookiesLanguage') === 'English') {
+                this.changeLanguageToEng()
+            }
+        }
     },
     methods: {
+        changeLanguageToEng() {
+            this.titleText = 'Notes'
+            this.placeholderText = 'Enter note title...'
+            this.addBtnText = 'Create'
+            this.saveBtnText = 'Save'
+            this.editBtnText = 'Edit'
+            this.deleteBtnText = 'Delete'
+            this.cancelBtnText = 'Cancel'
+            this.allNotesText = 'All notes'
+            this.noNotesYetText = 'No any notes.'
+            this.wasRemovedText = 'Note was deleted'
+            this.currentLanguage = 'English'
+            window.$cookies.set('cookiesLanguage', this.currentLanguage)
+        },
+        changeLanguageToRu() {
+            this.titleText = 'Заметки'
+            this.placeholderText = 'Введите название заметки'
+            this.addBtnText = 'Добавить'
+            this.saveBtnText = 'Сохранить'
+            this.editBtnText = 'Редактировать'
+            this.deleteBtnText = 'Удалить'
+            this.cancelBtnText = 'Отменить'
+            this.allNotesText = 'Всего заметок'
+            this.noNotesYetText = 'Заметок пока нет.'
+            this.wasRemovedText = 'Заметка была удалена'
+            this.currentLanguage = 'Russian'
+            window.$cookies.set('cookiesLanguage', this.currentLanguage)
+        },
         addToCookies() {
             window.$cookies.set('cookiesNotesList',JSON.stringify(this.notesList))
             this.notesList = JSON.parse(window.$cookies.get('cookiesNotesList'))
