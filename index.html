@@ -21,7 +21,7 @@
             </li>
         </ul>
         <ul class="navbar-menu">
-            <li>
+            <li class="list-item-nav">
                 <button class="btn" @click="changeLanguageToRu()">Русский</button>
                 <button class="btn" @click="changeLanguageToEng()">English</button>
             </li>
@@ -71,9 +71,8 @@
         <ul class="list" v-if="notesList.length !== 0">
             <li class="list-item noselect" v-for="(uNote, i) in notesList">
                 {{ i + 1}}) {{ uNote }}
-                <span>
+                <span class="list-item-btn">
                     <button
-                        style="right: 0"
                         class="btn primary"
                         @click="editNote(i)">
                         {{editBtnText}}

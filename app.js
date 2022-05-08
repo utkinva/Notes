@@ -50,7 +50,7 @@ const App = {
         changeLanguageToEng() {
             this.toolTipText = 'Maximum length 50 characters'
             this.titleText = 'Notes'
-            this.placeholderText = 'Enter note title...'
+            this.placeholderText = 'Type note title...'
             this.addBtnText = 'Create'
             this.saveBtnText = 'Save'
             this.editBtnText = 'Edit'
